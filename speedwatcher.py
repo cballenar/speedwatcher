@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 import MySQLdb
 import MySQLdb.cursors
-from math import ceil
+from math import ceil, isnan
 from calendar import monthrange
 from datetime import datetime, timedelta
 
 class SpeedWatcher(object):
     def __init__(self, date_start, date_end):
-        self.F = '%Y-%m-%d %H:%M:%S'
+        self.F = '%Y-%m-%d'
         self.data = None
         self.date_start = None
         self.date_end = None
@@ -134,9 +134,10 @@ class SpeedWatcher(object):
 
             data_date = data_date if data_date else period
 
-            data_date = data_date.strftime("%Y-%m-%d %H:%M:%S")
+            data_date = data_date.strftime("%Y-%m-%d-%H")
             data_average = round(self.avg(data), 2)
 
-            data_summary.append({ 'time': data_date, 'data': data_average })
+            if not isnan(data_average):
+                data_summary.append({ 'date': data_date, 'value': data_average })
 
         return data_summary

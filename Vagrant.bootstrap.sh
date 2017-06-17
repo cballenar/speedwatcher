@@ -6,7 +6,7 @@ apt-get update
 
 # dependencies
 apt-get install -y python-dev python-pip
-pip install virtualenv flask flask-mysql    
+pip install virtualenv flask flask_restful flask-mysql
 
 
 # ---------------------------------------
