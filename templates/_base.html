@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}SlideGrubber</title>
+    <meta name="description" content="Back up your SlideShare presentations to PDF">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="/assets/amcharts/amcharts.js"></script>
+    <script src="/assets/amcharts/serial.js"></script>
+    <script src="/assets/amcharts/themes/dark.js"></script>
+    <script>
+      (function(d) {
+        var config = {
+          kitId: 'hca1dif',
+          scriptTimeout: 3000,
+          async: true
+        },
+        h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+      })(document);
+    </script>
+</head>
+<body>
+  <div class="outer-wrapper">
+    <header class="site-header">
+      <div class="wrapper">
+        <h1 class="site-logo"><a class="site-title" href="/"><span class="b12">Slide</span>Grubber</a></h1>
+        <span class="subheader">Back up your SlideShare presentations to PDF</span>
+      </div>
+    </header>
+
+    <div class="site-content">
+      <div class="wrapper">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+    <div class="footer-push"></div>
+  </div>
+  <footer class="site-footer">
+    <div class="wrapper">
+      <p class="bragging-rights">Built by <a href="http://cballenar.me">CBallenar</a></p>
+      <p class="social-box"><a href="https://github.com/cballenar/slideshare-to-pdf" title="View Slideshare to PDF in GitHub"><i class="fa fa-github"></i> View GitHub Project</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

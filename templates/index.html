@@ -1,0 +1,65 @@
+{% extends "_base.html" %}
+
+{% block content %}
+    <h3>Insert URL</h3>
+    <form method="post" action="api/get">
+        <div><label for="date-start">Start Date:</label><input name="date_start" id="date-start" type="date"></div>
+        <div><label for="date-end">End Date:</label><input name="date_end" id="date-end" type="date"></div>
+        <div>
+            <label for="period-hour">Hourly <input id="period-hour" name="period_type" value="hour" type="radio"></label>
+            <label for="period-day">Daily <input id="period-day" name="period_type" value="day" type="radio"></label>
+            <label for="period-week">Weekly <input id="period-week" name="period_type" value="week" type="radio"></label>
+            <label for="period-month">Monthly <input id="period-month" name="period_type" value="month" type="radio"></label>
+        </div>
+        <div>
+            <label for="speed-down">Download Speed <input id="speed-down" name="data" value="speed_down" type="radio"></label>
+            <label for="speed-up">Upload Speed <input id="speed-up" name="data" value="speed_up" type="radio"></label>
+            <label for="ping">Ping <input id="ping" name="data" value="ping" type="radio"></label>
+        </div>
+        <input type="submit" value="Send">
+    </form>
+    <!-- a0 -->
+    <ins class="adsbygoogle"
+         style="display:block; margin: 24px 0;"
+         data-ad-client="ca-pub-3534109993778920"
+         data-ad-slot="8618343091"
+         data-ad-format="auto"></ins>
+    <h3>Latest Grubs</h3>
+    <ul class="items">
+    {% for (id, slide_title, slide_sourceurl, slide_downloadurl, slide_status, date_created) in slidesData %}
+        {% if loop.index%20 == 0 %}
+            <!-- a1 -->
+            <ins class="adsbygoogle"
+                 style="display:block; margin: 24px 0;"
+                 data-ad-client="ca-pub-3534109993778920"
+                 data-ad-slot="8618343091"
+                 data-ad-format="auto"></ins>
+        {% endif %}
+
+        <li id="slide-$id" data-date="$date_created">
+
+            {% if slide_status == 'Ready' %}
+                <span class="label label-success">$slide_status</span>
+            {% elif slide_status == 'Initializing' or slide_status == 'Downloading' or slide_status == 'Converting' %}
+                <span class="label label-warning">$slide_status</span>
+            {% elif slide_status == 'Failed' %}
+                <span class="label label-danger">$slide_status</span>
+            {% else %}
+                <span class="label">$slide_status</span>
+            {% endif %}
+
+            <span class="title">$slide_title</span>
+            <a class="source" title="View Original" href="$slide_sourceurl">
+                <span class="fallback">View Source </span>
+                <i class="fa fa-link"></i>
+            </a>
+            {% if slide_status != 'Failed' %}
+                <a class="download" title="Download PDF" href="$slide_downloadurl">
+                    <span class="fallback">Download PDF </span>
+                    <i class="fa fa-download"></i>
+                </a>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
